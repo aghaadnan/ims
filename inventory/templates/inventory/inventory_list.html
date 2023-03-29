@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container container-lg">
+<ul class="list-group list-group-flush">
+  <li class="list-group-item"><a href="{% url 'inventory:trackerdevice_list'%}">Tracker Devices</a></li>
+  <li class="list-group-item"><a href="{% url 'inventory:sim_list'%}">Sims</a></li>
+</ul>
+</div>
+
+{% endblock %}

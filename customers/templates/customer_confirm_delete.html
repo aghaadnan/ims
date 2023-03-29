@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Delete Customer</h1>
+
+<p>Are you sure you want to delete "{{ object }}"?</p>
+
+<form method="post">
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{{ request.GET.next }}">
+  <button type="submit" class="btn btn-danger">Delete</button>
+  <a href="{{ request.GET.next }}" class="btn btn-primary">Cancel</a>
+</form>
+{% endblock %}

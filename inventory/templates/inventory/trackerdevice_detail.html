@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">{{ trackerdevice_item.model_number }}</h3>
+          </div>
+          <div class="card-body">
+            <p><strong>Vendor:</strong> {{ trackerdevice_item.vendor }}</p>
+            <p><strong>Price:</strong> ${{ trackerdevice_item.price }}</p>
+            <p><strong>IMEI:</strong> {{ trackerdevice_item.imei }}</p>
+            <p><strong>User:</strong> {{ trackerdevice_item.user }}</p>
+            <p><strong>Company:</strong> {{ trackerdevice_item.company }}</p>
+          </div>
+          <div class="card-footer">
+            <a href="{% url 'inventory:trackerdevice_list' %}" class="btn btn-secondary">Back</a>
+            <a href="{% url 'inventory:trackerdevice_delete' trackerdevice_item.pk %}" class="btn btn-danger">Delete</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

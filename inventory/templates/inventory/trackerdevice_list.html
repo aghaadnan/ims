@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid mt-3">
+  <div class="card">
+    <div class="card-header">
+      <h5>Inventory List</h5>
+      <a href="{% url 'inventory:trackerdevice_new' %}" class="btn btn-primary">Add New device</a>
+     </div>
+    <div class="card-body">
+      {% if object_list %}
+ 
+      <table class="table table-hover table-striped">
+        <thead>
+              <tr>
+            <th scope="col">#</th>
+            <th>Model Number</th>
+            <th>Vendor</th>
+            <th>Price</th>
+            <th>IMEI</th>
+            <th>Company</th>
+            <th></th>
+              </tr>
+        </thead>
+          <tbody>
+            {% for item in object_list %}
+              <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ item.model_number }}</td>
+                <td>{{ item.vendor }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.imei }}</td>
+                <td>{{ item.company }}</td>
+                <td>
+                    <a href="{% url 'inventory:trackerdevice_detail' item.pk %}" class="btn btn-success btn-sm">View</a>
+                    <a href="{% url 'inventory:trackerdevice_edit' item.id %}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="{% url 'inventory:trackerdevice_delete' item.id %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+
+              
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="6">No tracking device found.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+    </table>
+    {% else %}
+        <p>No vehicles found.</p>
+        {% endif %}
+      </div>
+  </div>
+</div>
+{% endblock %}
+
+

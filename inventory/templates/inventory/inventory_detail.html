@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Inventory Item Detail</h2>
+  <table>
+    <tbody>
+      <tr>
+        <th>Name:</th>
+        <td>{{ object.name }}</td>
+      </tr>
+      <tr>
+        <th>Quantity:</th>
+        <td>{{ object.quantity }}</td>
+      </tr>
+      <tr>
+        <th>Price:</th>
+        <td>{{ object.price }}</td>
+      </tr>
+      <tr>
+        <th>User:</th>
+        <td>{{ object.user }}</td>
+      </tr>
+      <tr>
+        <th>Company:</th>
+        <td>{{ object.company }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <a href="{% url 'inventory:inventory_edit' object.pk %}">Edit</a>
+  <a href="{% url 'inventory:inventory_delete' object.pk %}">Delete</a>
+{% endblock %}

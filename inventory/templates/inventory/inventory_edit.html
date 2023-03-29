@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Add New Inventory Item</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div>
+      <label for="id_name">Name:</label>
+      {{ form.name }}
+    </div>
+    <div>
+      <label for="id_quantity">Quantity:</label>
+      {{ form.quantity }}
+    </div>
+    <div>
+      <label for="id_price">Price:</label>
+      {{ form.price }}
+    </div>
+    <div>
+      <label for="id_user">User:</label>
+      {{ form.user }}
+    </div>
+    <div>
+      <label for="id_company">Company:</label>
+      {{ form.company }}
+    </div>
+    <button type="submit">Save</button>
+  </form>
+{% endblock %}
