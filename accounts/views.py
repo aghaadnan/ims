@@ -58,7 +58,7 @@ def login_view(request):
 @login_required
 def redirect_user(request):
     if request.user.is_superuser:
-        return redirect('/')
+        return redirect('/companies/')
     elif request.user.is_admin:
         return redirect('/inventory/')
     else:
@@ -86,7 +86,10 @@ class StaffListView(UserPassesTestMixin, ListView):
     def get_queryset(self):
         # Only show staff accounts for the current user's company
         return self.model.objects.filter(company=self.request.user.company)
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title_left'] = 'Staff list'
+        return context
 
 # @method_decorator(login_required, name='dispatch')
 # class StaffCreateView(UserPassesTestMixin, CreateView):

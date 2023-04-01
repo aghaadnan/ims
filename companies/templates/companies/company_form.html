@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="container">
-  <div class="row" >
+  <div class="main_content_iner ">
+ <div class="container-fluid p-0 sm_padding_15px">
+<div class="row" >
+
 <div  class="col">
+
 </div>
-<div  class="col">
+<div  class="col-lg-6">
+
+ <div class="white_card card_height_100 mb_30">
+ <div class="white_card_body">
     <h1>Create Company</h1>
     <form method="post">
       {% csrf_token %}
@@ -14,9 +20,12 @@
       <button type="submit" class="btn btn-primary">Save</button>
     </form>
       </div>
-      <div  class="col">
 </div>
-      </div>
-      
-  </div>
+</div>
+<div  class="col">
+</div>
+
+</div>
+</div>
+</div>
 {% endblock %}

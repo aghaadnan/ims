@@ -1,15 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Register</h2>
-  <div class="container p-5">
-
+ <div class="main_content_iner ">
+ <div class="container-fluid p-0 sm_padding_15px">
 <div class="row" >
 
 <div  class="col">
 
 </div>
-<div  class="col">
+<div  class="col-lg-6">
+
+ <div class="white_card card_height_100 mb_30">
+ <div class="white_card_body">
+  <h2>Register</h2>
+ 
 <form method='post'>
 {% csrf_token %}
 {% load crispy_forms_tags %}
@@ -17,9 +21,12 @@
 <button type='submit' class="btn btn-primary">Register</button>
 </form>
 <hr />
-
+</div>
+</div>
 </div>
 <div  class="col">
+</div>
+
 </div>
 </div>
 </div>

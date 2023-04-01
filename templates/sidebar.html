@@ -1,0 +1,126 @@
+ {% load static %}
+ <!-- sidebar  -->
+<nav class="sidebar">
+    <div class="logo d-flex justify-content-between">
+        <a class="large_logo" href="/"><img src="{% static 'img/logo.png' %}" alt=""></a>
+        <a class="small_logo" href="/"><img src="{% static 'img/mini_logo.png' %}" alt=""></a>
+        <div class="sidebar_close_icon d-lg-none">
+            <i class="ti-close"></i>
+        </div>
+    </div>
+    <ul id="sidebar_menu">
+    {% if request.user.is_authenticated %}
+        {% if request.user.is_superuser %}
+        <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{% static 'img/menu-icon/dashboard.svg' %}" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Companies</span>
+                </div>
+            </a>
+            <ul>
+                <li><a href="/companies/">View Companies</a></li>
+              <li><a href="/companies/new/">Add company</a></li>
+              
+            </ul>
+        </li>
+        <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{% static 'img/menu-icon/dashboard.svg' %}" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Register </span>
+                </div>
+            </a>
+            <ul>  
+              <li><a href="/accounts/register/">Add User</a></li>
+            </ul>
+        </li>
+        {% else %}
+            {% if request.user.is_admin and not request.user.is_superuser %}
+        <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{% static 'img/menu-icon/dashboard.svg' %}" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Staff Management </span>
+                </div>
+            </a>
+            <ul>
+                <li><a href="\accounts\staff\">Staff list</a></li>
+              <li><a href="\accounts\staff\create\">Add staff</a></li>
+              
+            </ul>
+        </li>
+          <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{% static 'img/menu-icon/6.svg' %}" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Inventory</span>
+                </div>
+            </a>
+            <ul>
+                <li><a href="/inventory/trackerdevices/">Trackers</a></li>
+              <li><a href="/inventory/sims/">Sims</a></li>
+              
+            </ul>
+        </li>
+        <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{% static 'img/menu-icon/18.svg' %}" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Vehicles</span>
+                </div>
+            </a>
+            <ul>
+                <li><a href="/vehicles/">View Vehicles</a></li>
+              <li><a href="/vehicles/create/">Add vehicle</a></li>
+              
+            </ul>
+        </li>
+        <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{% static 'img/menu-icon/5.svg' %}" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Customers</span>
+                </div>
+            </a>
+            <ul>
+                <li><a href="/customers/">View customers</a></li>
+              <li><a href="/customers/create/">Add customers</a></li>
+              
+            </ul>
+        </li>
+        <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{% static 'img/menu-icon/18.svg' %}" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Installations</span>
+                </div>
+            </a>
+            <ul>
+                <li><a href="/installations/">View Installations</a></li>
+              <li><a href="/installations/create/">Add installations</a></li>
+              
+            </ul>
+        </li>
+            {% endif %}
+           {% endif %}
+    {% endif %}  
+  
+    
+      </ul>
+</nav>
+ <!--/ sidebar  -->
