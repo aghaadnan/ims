@@ -10,4 +10,4 @@ class Customer(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='customer_items')
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='customer_items')
     def __str__(self):
-        return self.name
+        return self.Name

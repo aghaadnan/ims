@@ -27,6 +27,7 @@ class TrackerDevice(models.Model):
     vendor = models.CharField(max_length=255)
     price = models.DecimalField(decimal_places=2, max_digits=10)
     imei = models.CharField(max_length=255)
+    isUsed = models.BooleanField(default=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='trackerdevice_items')
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='trackerdevice_items')
     def __str__(self):
@@ -51,6 +52,7 @@ class Sim(models.Model):
     OPERATOR = models.CharField(max_length=50, choices=OPERATOR_CHOICES)
     SIM_TYPE = models.CharField(max_length=50, choices=GSM_CHOICES)
     PACKAGE = models.CharField(max_length=50)
+    isUsed = models.BooleanField(default=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='sim_items')
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='sim_items')
     def __str__(self):

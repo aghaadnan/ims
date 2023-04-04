@@ -20,7 +20,9 @@ class VehicleListView(LoginRequiredMixin, ListView):
 class VehicleCreateView(LoginRequiredMixin, CreateView):
     model = Vehicle
     template_name = 'vehicles/vehicle_form.html'
-    fields = ('RegistrationNumber', 'Make', 'Model', 'EngineNumber', 'ChesisNumber', 'Color')
+    fields = ('RegistrationNumber', 'Make', 'Model', 'EngineNumber', 'ChesisNumber', 'Color', 'customer', 
+              'trackerDevice', 'sim', 'isTrackerInstalled' )
+             
     success_url = reverse_lazy('vehicles:vehicle_list')
 
     def form_valid(self, form):

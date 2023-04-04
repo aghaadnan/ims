@@ -5,6 +5,16 @@
   <div class="card">
     <div class="card-header">
       <h5>Inventory List</h5>
+      {% if messages %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
       <a href="{% url 'inventory:trackerdevice_new' %}" class="btn btn-primary">Add New device</a>
      </div>
     <div class="card-body">
