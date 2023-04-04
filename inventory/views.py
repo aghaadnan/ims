@@ -186,7 +186,6 @@ class TrackerDeviceCreateView(LoginRequiredMixin, CreateView):
             trackerdevice = TrackerDevice(
                 model_number=form.cleaned_data['model_number'],
                 vendor=form.cleaned_data['vendor'],
-                price=form.cleaned_data['price'],
                 imei=imei,
                 user=self.request.user,
                 company=company,

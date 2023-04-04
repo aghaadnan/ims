@@ -23,9 +23,21 @@ class Inventory(models.Model):
         return self.name
 
 class TrackerDevice(models.Model):
-    model_number = models.CharField(max_length=255)
-    vendor = models.CharField(max_length=255)
-    price = models.DecimalField(decimal_places=2, max_digits=10)
+    
+    MODEL_CHOICES = [
+        ('fmB920', 'FMB920'),
+        ('FMB125', 'FMB125'),
+        ('fmt100', 'FMT100'),
+        ('gv300', 'GV300'),
+        ('gv55', 'GV55'),
+    ]
+
+    VENDOR_CHOICES = [
+        ('teltonika', 'Teltonika'),
+        ('queclink', 'Queclink'),
+    ]
+    model_number = models.CharField(max_length=255, choices=MODEL_CHOICES)
+    vendor = models.CharField(max_length=255, choices=VENDOR_CHOICES)
     imei = models.CharField(max_length=255)
     isUsed = models.BooleanField(default=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='trackerdevice_items')

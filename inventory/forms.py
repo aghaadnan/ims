@@ -54,7 +54,7 @@ class TrackerDeviceForm(forms.ModelForm):
 
     class Meta:
         model = TrackerDevice
-        fields = ('model_number', 'vendor', 'price', 'quantity', 'csv_file')
+        fields = ('model_number', 'vendor', 'quantity', 'csv_file')
 class SimForm(forms.ModelForm):
     quantity = forms.IntegerField(min_value=1)
     csv_file = forms.FileField(
