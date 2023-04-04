@@ -65,4 +65,4 @@ class SimForm(forms.ModelForm):
     class Meta:
         model = Sim
         fields = ['MSISDN', 'ICC_ID', 'OPERATOR', 'SIM_TYPE', 'PACKAGE', 'quantity', 'csv_file']
-        fields = ('model_number', 'vendor', 'price', )
+        #fields = ('model_number', 'vendor', 'price', )
