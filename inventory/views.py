@@ -2,14 +2,13 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from .models import Inventory, TrackerDevice
+from .models import Inventory, TrackerDevice, TrackerDeviceVendor, TrackerDeviceModel
 from companies.models import Company
 from .forms import InventoryForm, TrackerDeviceForm, SimForm
 from .models import Sim
 import csv
 from io import TextIOWrapper
 from django.contrib import messages
-
 
 class InventoryListView(LoginRequiredMixin, ListView):
     template_name = 'inventory/inventory_list.html'
@@ -18,14 +17,10 @@ class InventoryListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         company = self.request.user.company
         return Inventory.objects.filter(company=company)
-
-
 class InventoryDetailView(LoginRequiredMixin, DetailView):
     model = Inventory
     template_name = 'inventory/inventory_detail.html'
     context_object_name = 'inventory_item'
-
-
 class InventoryCreateView(LoginRequiredMixin, CreateView):
     model = Inventory
     template_name = 'inventory/inventory_edit.html'
@@ -41,8 +36,6 @@ class InventoryCreateView(LoginRequiredMixin, CreateView):
         inventory_item.company = company
         inventory_item.save()
         return redirect('inventory_detail', pk=inventory_item.pk)
-
-
 class InventoryUpdateView(LoginRequiredMixin, UpdateView):
     model = Inventory
     template_name = 'inventory/inventory_edit.html'
@@ -62,8 +55,6 @@ class InventoryUpdateView(LoginRequiredMixin, UpdateView):
         inventory_item.company = company
         inventory_item.save()
         return redirect('inventory_detail', pk=inventory_item.pk)
-
-
 class InventoryDeleteView(LoginRequiredMixin, DeleteView):
     model = Inventory
     template_name = 'inventory/inventory_confirm_delete.html'
@@ -270,3 +261,48 @@ class SimDeleteView(DeleteView):
     model = Sim
     success_url = reverse_lazy('inventory:sim_list')
     template_name = 'inventory/sim_confirm_delete.html'
+
+
+
+class TrackerDeviceVendorListView(ListView):
+    model = TrackerDeviceVendor
+    template_name = 'inventory/trackerdevicevendor_list.html'
+    context_object_name = 'vendors'
+
+class TrackerDeviceVendorCreateView(CreateView):
+    model = TrackerDeviceVendor
+    template_name = 'inventory/trackerdevicevendor_edit.html'
+    fields = ['vendor']
+
+class TrackerDeviceVendorUpdateView(UpdateView):
+    model = TrackerDeviceVendor
+    template_name = 'inventory/trackerdevicevendor_edit.html'
+    fields = ['vendor']
+
+class TrackerDeviceVendorDeleteView(DeleteView):
+    model = TrackerDeviceVendor
+    template_name = 'inventory/trackerdevicevendor_delete.html'
+    success_url = reverse_lazy('inventory:trackerdevicevendor_list')
+
+
+class TrackerDeviceModelListView(ListView):
+    model = TrackerDeviceModel
+    template_name = 'inventory/trackerdevicemodel_list.html'
+    context_object_name = 'trackerdevicemodels'
+
+class TrackerDeviceModelCreateView(CreateView):
+    model = TrackerDeviceModel
+    template_name = 'inventory/trackerdevicemodel_edit.html'
+    fields = ['model_number', 'vendor']
+    success_url = reverse_lazy('inventory:trackerdevicemodel_list')
+
+class TrackerDeviceModelUpdateView(UpdateView):
+    model = TrackerDeviceModel
+    template_name = 'inventory/trackerdevicemodel_edit.html'
+    fields = ['model_number', 'vendor']
+    success_url = reverse_lazy('inventory:trackerdevicemodel_list')
+
+class TrackerDeviceModelDeleteView(DeleteView):
+    model = TrackerDeviceModel
+    template_name = 'inventory/trackerdevicemodel_confirm_delete.html'
+    success_url = reverse_lazy('inventory:trackerdevicemodel_list')
