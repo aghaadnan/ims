@@ -9,7 +9,15 @@ from .views import (
     SimCreateView,
     SimListView,
     SimUpdateView,
-    SimDeleteView
+    SimDeleteView,
+    TrackerDeviceVendorListView, 
+    TrackerDeviceVendorCreateView, 
+    TrackerDeviceVendorUpdateView, 
+    TrackerDeviceVendorDeleteView,
+    TrackerDeviceModelListView,
+    TrackerDeviceModelCreateView,
+    TrackerDeviceModelUpdateView,
+    TrackerDeviceModelDeleteView,
 )
 app_name = 'inventory'
 urlpatterns = [
@@ -28,4 +36,12 @@ urlpatterns = [
     path('sims/<int:pk>/edit/', SimUpdateView.as_view(), name='sim_update'),
     path('sims/<int:pk>/delete/', SimDeleteView.as_view(), name='sim_delete'),
     #path('sims/<int:pk>/', SimDetailView.as_view(), name='sim_detail'),
+    path('vendor/', TrackerDeviceVendorListView.as_view(), name='trackerdevicevendor_list'),
+    path('vendor/new/', TrackerDeviceVendorCreateView.as_view(), name='trackerdevicevendor_new'),
+    path('vendor/<int:pk>/', TrackerDeviceVendorUpdateView.as_view(), name='trackerdevicevendor_edit'),
+    path('vendor/<int:pk>/delete/', TrackerDeviceVendorDeleteView.as_view(), name='trackerdevicevendor_delete'),
+    path('trackerdevicemodel/', TrackerDeviceModelListView.as_view(), name='trackerdevicemodel_list'),
+    path('trackerdevicemodel/create/', TrackerDeviceModelCreateView.as_view(), name='trackerdevicemodel_create'),
+    path('trackerdevicemodel/<int:pk>/update/', TrackerDeviceModelUpdateView.as_view(), name='trackerdevicemodel_update'),
+    path('trackerdevicemodel/<int:pk>/delete/', TrackerDeviceModelDeleteView.as_view(), name='trackerdevicemodel_delete'),
 ]

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>User Types</h2>
+  <a href="{% url 'accounts:usertype_create' %}" class="btn btn-primary mb-3">Create User Type</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>User Type</th>
+        <th>Date Created</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for usertype in usertypes %}
+        <tr>
+          <td>{{ usertype.usertype }}</td>
+          <td>{{ usertype.datentime}}</td>
+          <td>
+            <a href="{% url 'accounts:usertype_update' usertype.id %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+            <a href="{% url 'accounts:usertype_delete' usertype.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="3">No user types found.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

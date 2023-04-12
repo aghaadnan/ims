@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid mt-3">
+  <div class="card">
+    <div class="card-header">
+      <h5>Delete Vendor</h5>
+    </div>
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete "{{ object }}"?</p>
+        <input type="submit" value="Confirm" class="btn btn-danger">
+        <a href="{% url 'inventory:trackerdevicevendor_list' %}" class="btn btn-primary">Cancel</a>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

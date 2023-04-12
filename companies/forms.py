@@ -11,4 +11,10 @@ class CompanyForm(forms.ModelForm):
     helper.add_input(Submit('submit', 'Save'))
     class Meta:
         model = Company
-        fields = ['name', 'address', 'phone']
+        fields = ['name', 'contactperson', 'address', 'phone','city','email','GST','NTN','package']
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['name'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        # self.fields['city'].widget = forms.Select(attrs={'class': 'form-control'})
+        # self.fields['address'].widget = forms.TextInput(attrs={'class': 'form-control'})

@@ -21,23 +21,34 @@ class Inventory(models.Model):
 
     def __str__(self):
         return self.name
+class TrackerDeviceVendor(models.Model):
+    vendor = models.CharField(max_length=255, unique=True)
+    def __str__(self):
+        return self.vendor
+
+class TrackerDeviceModel(models.Model):
+    model_number = models.CharField(max_length=255)
+    vendor = models.ForeignKey(TrackerDeviceVendor, on_delete=models.CASCADE, related_name='trackerdevice_vendor')
+    def __str__(self):
+        return self.model_number
 
 class TrackerDevice(models.Model):
     
-    MODEL_CHOICES = [
-        ('fmB920', 'FMB920'),
-        ('FMB125', 'FMB125'),
-        ('fmt100', 'FMT100'),
-        ('gv300', 'GV300'),
-        ('gv55', 'GV55'),
-    ]
+    # MODEL_CHOICES = [
+    #     ('fmB920', 'FMB920'),
+    #     ('FMB125', 'FMB125'),
+    #     ('fmt100', 'FMT100'),
+    #     ('gv300', 'GV300'),
+    #     ('gv55', 'GV55'),
+    # ]
 
-    VENDOR_CHOICES = [
-        ('teltonika', 'Teltonika'),
-        ('queclink', 'Queclink'),
-    ]
-    model_number = models.CharField(max_length=255, choices=MODEL_CHOICES)
-    vendor = models.CharField(max_length=255, choices=VENDOR_CHOICES)
+    # VENDOR_CHOICES = [
+    #     ('teltonika', 'Teltonika'),
+    #     ('queclink', 'Queclink'),
+    # ]
+    # model_number = models.CharField(max_length=255, choices=MODEL_CHOICES)
+    # vendor = models.CharField(max_length=255, choices=VENDOR_CHOICES)
+    model_number = models.ForeignKey(TrackerDeviceModel, on_delete=models.CASCADE, related_name='trackerdevice_items')
     imei = models.CharField(max_length=255)
     isUsed = models.BooleanField(default=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='trackerdevice_items')

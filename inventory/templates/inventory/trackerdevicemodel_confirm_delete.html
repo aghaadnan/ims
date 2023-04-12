@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Delete Tracker Device Model</h1>
+  <p>Are you sure you want to delete the Tracker Device Model "{{ trackerdevicemodel }}"?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+    <a href="{% url 'inventory:trackerdevicemodel_list' %}">Cancel</a>
+  </form>
+{% endblock %}

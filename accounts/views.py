@@ -10,8 +10,8 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib import messages
 from .forms import CustomUserCreationForm
-from .models import UserProfile
-from django.urls import reverse
+from .models import UserProfile, UserType
+from django.urls import reverse, reverse_lazy
 from django import forms
 
 class LandingPageView(TemplateView):
@@ -63,15 +63,11 @@ def redirect_user(request):
         return redirect('/inventory/')
     else:
         return redirect('/accounts/profile/')
+
 def profile_view(request):
     user_profile = request.user
     context = {'user_profile': user_profile}
     return render(request, 'registration/profile.html', context)
-
-
-
-
-
 
 @method_decorator(login_required, name='dispatch')
 class StaffListView(UserPassesTestMixin, ListView):
@@ -250,3 +246,26 @@ class StaffDeleteView(UserPassesTestMixin, DeleteView):
         return reverse('accounts:staff-list')
 
 
+
+@method_decorator(login_required, name='dispatch')
+class UserTypeListView(ListView):
+    model = UserType
+    template_name = 'accounts/usertype_list.html'
+    context_object_name = 'usertypes'
+@method_decorator(login_required, name='dispatch')
+class UserTypeCreateView(CreateView):
+    model = UserType
+    template_name = 'accounts/usertype_form.html'
+    fields = ['usertype']
+    success_url = reverse_lazy('accounts:usertype_list')
+
+class UserTypeUpdateView(UpdateView):
+    model = UserType
+    template_name = 'accounts/usertype_form.html'
+    fields = ['usertype']
+    success_url = reverse_lazy('accounts:usertype_list')
+
+class UserTypeDeleteView(DeleteView):
+    model = UserType
+    template_name = 'accounts/usertype_confirm_delete.html'
+    success_url = reverse_lazy('accounts:usertype_list')

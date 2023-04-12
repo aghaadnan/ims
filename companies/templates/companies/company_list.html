@@ -1,4 +1,170 @@
 {% extends 'base.html' %}
+{% block content %}
+  <div class="main_content_iner ">
+        <div class="container-fluid p-0">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="white_card card_height_100 mb_30">
+                        <div class="white_card_header">
+                            <div class="box_header m-0">
+                                <div class="main-title">
+                                    <h3 class="m-0">Companies</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="white_card_body">
+                            <div class="QA_section">
+                                <div class="white_box_tittle list_header">
+                                    <h4>shorting Arrow</h4>
+                                    <div class="box_right d-flex lms_block">
+                                        <div class="serach_field_2">
+                                            <div class="search_inner">
+                                                <form Active="#">
+                                                    <div class="search_field">
+                                                        <input type="text" placeholder="Search content here...">
+                                                    </div>
+                                                    <button type="submit"> <i class="ti-search"></i> </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="add_button ms-2">
+                                            <a href="#" data-toggle="modal" data-target="#addcategory" class="btn_1">Add New</a>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="QA_table mb_30">
+                                    <!-- table-responsive -->
+                                    {% if companies %}
+                                    <table class="table lms_table_active3 ">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Contact Person</th>
+                                                <th scope="col">Phone</th>
+                                                <th scope="col">City</th>
+                                                
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Actions</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                          <tbody>
+                                                {% for company in companies %}
+                                                  <tr {% if not company.is_active %}class="table-danger"{% endif %}>
+                                                    <th scope="row">{{ forloop.counter }}</th>
+                                                    <td scope="row">{{ company.name }}</td>
+                                                    <td>{{ company.contactperson }}</td>
+                                                    <td>{{ company.phone }}</td>
+                                                    <td>{{ company.city }}</td>
+                                                    
+                                                    <td> 
+                                                    <div class="checkbox_wrap d-flex align-items-center">
+                                                        <label class="form-label lms_checkbox_1" for="{{ company.id }}">
+                                                         {% csrf_token %}
+                                                            {% comment %} {% if company.is_active %}
+                                                            <input type="checkbox" id="{{ company.id }}" checked>
+                                                            {% else %}
+                                                            <input type="checkbox" id="{{ company.id }}">
+                                                             {% endif %}
+                                                            <div class="slider-check round"></div> {% endcomment %}
+                                                          <input type="checkbox" id="{{ company.id }}" {% if company.is_active %}checked{% endif %} onchange="toggleActiveStatus({{ company.id }})">
+                                                          <div class="slider-check round"></div>
+                                                        </label>
+                                                    </div>
+                                                    </td>
+                                                    <td>
+                                          
+                                                    <div class="action_btns d-flex">
+                                                        <a href="{% url 'home:company_detail' company.pk %}" class="action_btn mr_10"> <i class="far fa-eye"></i> </a>
+                                                        <a href="{% url 'home:company_update' company.pk %}" class="action_btn mr_10"> <i class="far fa-edit"></i> </a>
+                                                        <a href="{% url 'home:company_delete' company.pk %}" class="action_btn"> <i class="fas fa-trash"></i> </a>
+                                                        <a href="#exampleModalCenter" class="action_btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"> <i class="fas fa-wrench"></i> </a>
+                                                        
+                                                    </div>
+                                                    </td>
+                                                  </tr>
+                                                {% empty %}
+                                                  <tr>
+                                                    <td colspan="4">No companies found.</td>
+                                                  </tr>
+                                                {% endfor %}
+                                              </tbody>
+                                            </table>
+                                            {% else %}
+                                                  <p>No vehicles found.</p>
+                                                  {% endif %}
+                                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+             </div>
+          </div>
+      </div>
+ <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. A sed esse voluptates, minima neque asperiores, fuga, explicabo amet repudiandae odio et architecto nihil quibusdam blanditiis eos similique. Quisquam laboriosam modi eos tempore, dicta odit animi delectus provident consequatur suscipit quae! Accusantium tempore magni ab reprehenderit at reiciendis impedit sequi illo. </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+      {% block scripts %}
+  <script>
+  function toggleActiveStatus(companyId) {
+    var isChecked = document.getElementById(companyId).checked;
+    var csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+
+    // Send AJAX request
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/companies/toggle_company_status/');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.setRequestHeader('X-CSRFToken', csrfToken);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                // Success, do something
+                window.location.href = '/companies/';
+            } else {
+                // Error, do something
+                console.log('Error: ' + xhr.status);
+            }
+        }
+    };
+    xhr.send('company_id=' + companyId + '&is_active=' + isChecked);
+}
+
+  </script>
+{% endblock %}
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+{% comment %} {% extends 'base.html' %}
 
 {% block content %}
 <div class="container-fluid mt-3">
@@ -45,4 +211,4 @@
       </div>
     </div>
 </div>
-{% endblock %}
+{% endblock %} {% endcomment %}

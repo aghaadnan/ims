@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid mt-3">
+  <div class="card">
+    <div class="card-header">
+      <h5>Vendor List</h5>
+      <a href="{% url 'inventory:trackerdevicevendor_new' %}" class="btn btn-primary">Add New vendor</a>
+     </div>
+    <div class="card-body">
+      {% if object_list %}
+ 
+      <table class="table table-hover table-striped">
+        <thead>
+              <tr>
+            <th scope="col">#</th>
+            <th>Vendor</th>
+            <th></th>
+              </tr>
+        </thead>
+          <tbody>
+            {% for item in object_list %}
+              <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ item.vendor }}</td>
+                <td>
+                    <a href="{% url 'inventory:trackerdevicevendor_edit' item.pk %}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="{% url 'inventory:trackerdevicevendor_delete' item.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+
+              
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="6">No vendors found.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+    </table>
+    {% else %}
+        <p>No vendors found.</p>
+        {% endif %}
+      </div>
+  </div>
+</div>
+{% endblock %}

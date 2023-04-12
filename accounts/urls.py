@@ -12,5 +12,8 @@ urlpatterns = [
     path('staff/create/', views.StaffCreateView.as_view(), name='staff-create'),
     path('staff/<int:pk>/update/', views.StaffUpdateView.as_view(), name='staff-update'),
     path('staff/<int:pk>/delete/', views.StaffDeleteView.as_view(), name='staff-delete'),
-    
+    path('usertype/', views.UserTypeListView.as_view(), name='usertype_list'),
+    path('usertype/new/', views.UserTypeCreateView.as_view(), name='usertype_create'),
+    path('usertype/<int:pk>/edit/', views.UserTypeUpdateView.as_view(), name='usertype_update'),
+    path('usertype/<int:pk>/delete/', views.UserTypeDeleteView.as_view(), name='usertype_delete'),
 ]
