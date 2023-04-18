@@ -1,6 +1,4 @@
-
 {% extends 'base.html' %}
-
 {% block content %}
 <div class="main_content_iner ">
     <div class="container-fluid p-0 sm_padding_15px">
@@ -24,15 +22,25 @@
                                     <small id="hint_id_username" class="form-text text-muted">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small> 
                                 </div>
                                 <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label class="form-label" for="id_city">City<span class="asteriskField">*</span></label>
-                                        <select class="form-control" id="id_city" required name="city">
-  {% for value, label in form.city.field.choices %}
-    <option value="{{ value }}">{{ label }}</option>
-  {% endfor %}
-</select>
+                                <div class="col-md-6">
+  <label class="form-label" for="id_city">City<span class="asteriskField">*</span></label>
+  <div class="dropdown">
+    <button class="btn btn-light btn-block dropdown-toggle" type="button" id="cityDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Select City
+    </button>
+    <div class="dropdown-menu" aria-labelledby="cityDropdown">
+      <div class="dropdown-header">
+        <input type="text" class="form-control search-input" placeholder="Search...">
+      </div>
+      {% for value, label in form.city.field.choices %}
+        <a class="dropdown-item" href="#" data-value="{{ value }}">{{ label }}</a>
+      {% endfor %}
+    </div>
+    <input type="hidden" name="city" id="cityDropdownInput">
+  </div>
+</div>
 
-                                    </div>
+                             
                                     <div class="col-md-6">
                                         <label class="form-label" for="id_contactperson">Contact Person<span class="asteriskField">*</span></label>
                                         <input type="text" class="form-control" id="id_contactperson" required name="contactperson" placeholder="Enter contact person name">
@@ -65,6 +73,7 @@
                                                           
                                                       </div>
                                                   </div>
+                                                  
                                                   <div class="row mb-3">
                                                       <div class=" col-md-6">
                                                           <label class="form-label" for="inputPackage">Package<span class="asteriskField">*</span></label>
@@ -74,7 +83,12 @@
         {% endfor %}
     </select>
                                                       </div>
-                                                     
+                                                      
+                                                        <div class="col-md-6">
+                                                            <label class="form-label" for="id_renew_date">Renew Date<span class="asteriskField">*</span></label>
+                                                            <input type="date" class="form-control" id="id_renew_date" required name="renew_date" placeholder="Enter renew date">
+                                                        </div>
+                                                    
                                                   </div>
                                                   
                                                   <button type="submit" class="btn btn-primary">Submit</button>
@@ -86,8 +100,44 @@
               </div>
             </div>
         </div>  
-{% endblock %} 
+    {% block scripts %}
+<script>
+ 
+$(document).ready(function() {
+  // Initialize dropdown menu with Popper JS
+  new Popper($('#cityDropdown'), $('.dropdown-menu'), {
+    placement: 'bottom-start',
+  });
 
+  // Handle search input
+  $('.search-input').on('input', function() {
+    var searchText = $(this).val().toLowerCase();
+
+    // Show/hide options based on search text
+    $('.dropdown-item').each(function() {
+      var optionText = $(this).text().toLowerCase();
+      if (optionText.indexOf(searchText) >= 0) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+  });
+
+  // Handle option selection
+  $('.dropdown-item').on('click', function(e) {
+    e.preventDefault();
+    var value = $(this).data('value');
+    var label = $(this).text();
+    $('#cityDropdown').html(label);
+    $('#cityDropdownInput').val(value);
+  });
+});
+
+
+</script>
+{% endblock %} 
+{% endblock %}
 
  {% comment %} {% extends 'base.html' %}
 
@@ -121,3 +171,21 @@
 </div>
 </div>
 {% endblock %}  {% endcomment %}
+
+   {% comment %}  <div class="col-md-6">
+  <label class="form-label" for="id_city">City<span class="asteriskField">*</span></label>
+  <select class="form-control select2 mb-3" id="id_city" required name="city">
+    {% for value, label in form.city.field.choices %}
+      <option value="{{ value }}">{{ label }}</option>
+    {% endfor %}
+  </select>
+</div>
+                                   <div class="col-md-6">
+                                        <label class="form-label" for="id_city">City<span class="asteriskField">*</span></label>
+                                        <select class="form-control" id="id_city" required name="city">
+  {% for value, label in form.city.field.choices %}
+    <option value="{{ value }}">{{ label }}</option>
+  {% endfor %}
+</select>
+
+                                    </div> {% endcomment %}

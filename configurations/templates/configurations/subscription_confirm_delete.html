@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Delete Subscription</h1>
+  <p>Are you sure you want to delete "{{ subscription.subscription }}"?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, delete it.</button>
+    <a href="{% url 'configuration:subscription_list' %}">No, cancel.</a>
+  </form>
+{% endblock %}

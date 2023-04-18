@@ -32,7 +32,8 @@
           <td>{{ staff.last_name }}</td>
           <td>{{ staff.email }}</td>
           <td>
-           {% if staff.is_admin %}
+          {{ staff.usertype }}
+           {% comment %} {% if staff.is_admin %}
             Admin
             {% endif %}
             {% if staff.is_manager %}
@@ -43,7 +44,7 @@
             {% endif %}
              {% if staff.is_installer %}
             Installer
-            {% endif %}
+            {% endif %} {% endcomment %}
           </td>
           <td>{% if staff.is_active %}Active{% else %}Inactive{% endif %}</td>
           <td>

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import CompanyForm
-from .models import Company
+from .forms import CompanyForm, EmailTemplateForm
+from .models import Company, EmailTemplate
 from accounts.models import UserProfile
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
@@ -78,7 +78,7 @@ class CompanyCreateView(CreateView):
     model = Company
     form_class = CompanyForm
     template_name = 'companies/company_form.html'
-    success_url = reverse_lazy('companies:company_detail')
+    success_url = reverse_lazy('companies:company_list')
     
     def form_valid(self, form):
         form.instance.owner = self.request.user
@@ -108,6 +108,12 @@ def toggle_company_status(request):
         elif is_active.lower() == 'false':
             is_active = False
         company = Company.objects.get(id=company_id)
+        users = UserProfile.objects.filter(company=company)
+        print(users)
+        if users.exists():
+            for user in users:
+                user.is_active = is_active
+                user.save()
         company.is_active = is_active
         company.save()
         return JsonResponse({'success': True})
@@ -126,3 +132,27 @@ class CompanyStatusUpdateView(View):
         company.is_active = is_active
         company.save()
         return redirect('home:company_list')
+
+
+
+class EmailTemplateListView(ListView):
+    model = EmailTemplate
+    template_name = 'email_templates/email_template_list.html'
+    context_object_name = 'email_templates'
+
+class EmailTemplateCreateView(CreateView):
+    model = EmailTemplate
+    form_class = EmailTemplateForm
+    template_name = 'email_templates/email_template_create.html'
+    success_url = reverse_lazy('email_templates:list')
+
+class EmailTemplateUpdateView(UpdateView):
+    model = EmailTemplate
+    form_class = EmailTemplateForm
+    template_name = 'email_templates/email_template_update.html'
+    success_url = reverse_lazy('email_templates:list')
+
+class EmailTemplateDeleteView(DeleteView):
+    model = EmailTemplate
+    template_name = 'email_templates/email_template_confirm_delete.html'
+    success_url = reverse_lazy('email_templates:list')

@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from accounts.views import redirect_user, LandingPageView
+from dashboards.views import DashboardView
+
 
 admin.site.site_header = "Tracker MIS Admin"
 admin.site.site_title = "Tracker MIS Admin Portal"
@@ -29,8 +31,10 @@ urlpatterns = [
     path('customers/', include('customers.urls', namespace="cusotmers")),
     path('vehicles/', include('vehicles.urls', namespace="vehicles")),
     path('installations/', include('installations.urls', namespace="installations")),
-    path('accounts/', include('django.contrib.auth.urls')),
+   # path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls')),
+    path('dashboards/',include('dashboards.urls', namespace="dashboards")),
+    path('configurations/',include('configurations.urls', namespace="configurations")),
     path('redirect/', redirect_user, name='redirect'),
     
 ]

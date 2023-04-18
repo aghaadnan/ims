@@ -1,0 +1,73 @@
+<!-- configurations/templates/configurations/city_list.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main_content_iner ">
+  <div class="container-fluid p-0">
+      <div class="row justify-content-right">
+          <div class="col-lg-6">
+              <div class="white_card card_height_100 mb_30">
+                  <div class="white_card_header">
+                      <div class="box_header m-0">
+                          <div class="main-title">
+                              <h3 class="m-0">Companies</h3>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="white_card_body">
+                      <div class="QA_section">
+                          <div class="white_box_tittle list_header">
+                              {% comment %} <h4>shorting Arrow</h4> {% endcomment %}
+                              <div class="box_right d-flex lms_block">
+                                  {% comment %} <div class="serach_field_2">
+                                      <div class="search_inner">
+                                          <form Active="#">
+                                              <div class="search_field">
+                                                  <input type="text" placeholder="Search content here...">
+                                              </div>
+                                              <button type="submit"> <i class="ti-search"></i> </button>
+                                          </form>
+                                      </div>
+                                  </div> {% endcomment %}
+                                  <div class="add_button ms-2">
+                                      <a href="/configurations/cities/create/"   class="btn_1">Add New</a>
+                                  </div>
+                              </div>
+                          </div>
+  
+                          <div class="QA_table mb_30">
+                              <!-- table-responsive -->
+  <table class="table lms_table_active3">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>City</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for city in object_list %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ city.city }}</td>
+          <td>
+            <a href="{% url 'configurations:city_update' city.id %}" class="btn btn-secondary">Edit</a>
+            <a href="{% url 'configurations:city_delete' city.id %}" class="btn btn-danger">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+{% endblock %}

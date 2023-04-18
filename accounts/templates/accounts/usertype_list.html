@@ -3,7 +3,7 @@
 {% block content %}
   <h2>User Types</h2>
   <a href="{% url 'accounts:usertype_create' %}" class="btn btn-primary mb-3">Create User Type</a>
-  <table class="table">
+  <table  id="example"  class="table">
     <thead>
       <tr>
         <th>User Type</th>
@@ -28,4 +28,17 @@
       {% endfor %}
     </tbody>
   </table>
+
+
+ {% block scripts %}
+  <script>
+
+    $(document).ready(function() {
+      $('#example').DataTable({
+        responsive: true
+      });
+    });
+
+  </script>
+{% endblock %}
 {% endblock %}

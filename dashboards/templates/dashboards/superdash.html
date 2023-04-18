@@ -2,20 +2,121 @@
 
 {% block content %}
 
+<div class="main_content_iner ">
+  <div class="container-fluid p-0">
+    <div class="row justify-content-center">
+      <div class="col-md-2">
+        <div class="card mb-3 widget-chart">
+            <div class="icon-wrapper rounded-circle">
+                <div class="icon-wrapper-bg bg-primary"></div>
+                  <i class="ti-settings text-primary"></i>
+                </div>
+            <div class="widget-numbers"><span>{{ total_companies }}</span></div>
+            <div class="widget-subheading">Total Companies</div>
+          
+        </div>
+      </div>
 
-<div class="col-md-4">
-                    <div class="card mb-3 widget-chart">
-                        <div class="icon-wrapper rounded-circle">
-                            <div class="icon-wrapper-bg bg-primary"></div>
-                            <i class="ti-settings text-primary"></i>
+      <div class="col-md-2">
+        <div class="card mb-3 widget-chart">
+          <div class="icon-wrapper rounded-circle">
+            <div class="icon-wrapper-bg bg-success"></div>
+            <i class="ti-check text-success"></i>
+          </div>
+          <div class="widget-numbers"><span>{{ active_companies }}</span></div>
+          <div class="widget-subheading">Active Companies</div>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="card mb-3 widget-chart">
+          <div class="icon-wrapper rounded-circle">
+            <div class="icon-wrapper-bg bg-warning"></div>
+            <i class="ti-alert text-warning"></i>
+          </div>
+          <div class="widget-numbers"><span>{{ inactive_companies }}</span></div>
+          <div class="widget-subheading">Inactive Companies</div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="card mb-3 widget-chart">
+          <div class="icon-wrapper rounded-circle">
+            <div class="icon-wrapper-bg bg-secondary"></div>
+            <i class="ti-archive text-secondary"></i>
+          </div>
+          <div class="widget-numbers"><span>{{ inactive_companies }}</span></div>
+          <div class="widget-subheading">Companies/This Week</div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="card mb-3 widget-chart">
+          <div class="icon-wrapper rounded-circle">
+            <div class="icon-wrapper-bg bg-secondary"></div>
+            <i class="ti-folder text-secondary"></i>
+          </div>
+          <div class="widget-numbers"><span>{{ inactive_companies }}</span></div>
+          <div class="widget-subheading">Companies/This Month</div>
+        </div>
+      </div>
+    <div class="col-md-4">
+        <div class="card mb-3 widget-chart">
+          <div class="icon-wrapper rounded-circle">
+            <div class="icon-wrapper-bg bg-primary"></div>
+            <i class="ti-user text-primary"></i>
+          </div>
+          <div class="widget-numbers"><span>{{ total_users }}</span></div>
+          <div class="widget-subheading">Total Users</div>
+          
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card mb-3 widget-chart">
+          <div class="icon-wrapper rounded-circle">
+            <div class="icon-wrapper-bg bg-success"></div>
+            <i class="ti-user text-success"></i>
+          </div>
+          <div class="widget-numbers"><span>{{ active_users }}</span></div>
+          <div class="widget-subheading">Active Users</div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card mb-3 widget-chart">
+          <div class="icon-wrapper rounded-circle">
+            <div class="icon-wrapper-bg bg-danger"></div>
+            <i class="ti-user text-danger"></i>
+          </div>
+          <div class="widget-numbers"><span>{{ inactive_users }}</span></div>
+          <div class="widget-subheading">Inactive Users</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-8 ">
+                    <div class="white_card mb_30 card_height_100">
+                        <div class="white_card_header">
+                            <div class="row align-items-center justify-content-between flex-wrap">
+                                <div class="col-lg-4">
+                                    <div class="main-title">
+                                        <h3 class="m-0">Stoke Details</h3>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 text-end d-flex justify-content-end">
+                                    <select class="nice_Select2 max-width-220" >
+                                        <option value="1">Show by month</option>
+                                        <option value="1">Show by year</option>
+                                        <option value="1">Show by day</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                            <div class="widget-numbers"><span>46k</span></div>
-                            <div class="widget-subheading">Total Views</div>
-                        <div class="widget-description text-success">
-                            <i class="fa fa-angle-up ">
-
-                            </i>
-                            <span class="ps-1"><span>176%</span></span>
+                        <div class="white_card_body">
+                            <div id="management_bar"></div>
                         </div>
                     </div>
                 </div>
+  </div>
+</div>
+
+{% endblock %}

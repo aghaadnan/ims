@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="footer_iner text-center">
-                    <p>2020 © Influence - Designed by <a href="#"> <i class="ti-heart"></i> </a><a href="#"> Dashboard</a></p>
+                   
                 </div>
             </div>
         </div>
@@ -14,9 +14,11 @@
 </section>
 <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
 <!-- popper js -->
-<script src="{% static 'js/popper.min.js' %}"></script>
+{% comment %} <script src="{% static 'js/popper.min.js' %}"></script> {% endcomment %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <!-- bootstarp js -->
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+
 <!-- sidebar menu  -->
 <script src="{% static 'js/metisMenu.js' %}"></script>
 <!-- waypoints js -->
@@ -51,6 +53,7 @@
 <script src="{% static 'vendors/tagsinput/tagsinput.js' %}"></script>
 <!-- text editor js -->
 <script src="{% static 'vendors/text_editor/summernote-bs4.js' %}"></script>
+<script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
 <script src="{% static 'vendors/am_chart/amcharts.js' %}"></script>
 <!-- scrollabe  -->
 <script src="{% static 'vendors/scroll/perfect-scrollbar.min.js' %}"></script>
@@ -73,3 +76,81 @@
 <!-- custom js -->
 <script src="{% static 'js/dashboard_init.js' %}"></script>
 <script src="{% static 'js/custom.js' %}"></script>
+<script src="{% static 'js/scripts.js' %}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script>
+  CKEDITOR.replace('{{ form.body.id_for_label }}');
+</script>
+{% comment %} <script>
+ $(document).ready(function() {
+      $('#example').DataTable({
+        destroy: true,
+        responsive: true
+      });
+    });
+
+$(document).ready(function() {
+  // Initialize dropdown menu with Popper JS
+  new Popper($('#cityDropdown'), $('.dropdown-menu'), {
+    placement: 'bottom-start',
+  });
+
+  // Handle search input
+  $('.search-input').on('input', function() {
+    var searchText = $(this).val().toLowerCase();
+
+    // Show/hide options based on search text
+    $('.dropdown-item').each(function() {
+      var optionText = $(this).text().toLowerCase();
+      if (optionText.indexOf(searchText) >= 0) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+  });
+
+  // Handle option selection
+  $('.dropdown-item').on('click', function(e) {
+    e.preventDefault();
+    var value = $(this).data('value');
+    var label = $(this).text();
+    $('#cityDropdown').html(label);
+    $('#cityDropdownInput').val(value);
+  });
+}); 
+
+
+$(document).ready(function() {
+    // Initialize dropdown menu with Popper JS
+    var dropdown = new Popper($('#companyDropdown'), $('.dropdown-menu'), {
+        placement: 'bottom-start'
+    });
+
+    // Handle search input
+    $('.search-input').on('input', function() {
+        var searchText = $(this).val().toLowerCase();
+
+        // Show/hide options based on search text
+        $('.dropdown-item').each(function() {
+            var optionText = $(this).text().toLowerCase();
+            if (optionText.indexOf(searchText) >= 0) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    });
+
+    // Handle option selection
+    $('.dropdown-item').on('click', function(e) {
+        e.preventDefault();
+        var value = $(this).data('value');
+        var label = $(this).text();
+        $('#companyDropdown').html(label);
+        $('#companyDropdownInput').val(value);
+    });
+});
+
+</script> {% endcomment %}

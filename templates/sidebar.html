@@ -11,6 +11,16 @@
     <ul id="sidebar_menu">
     {% if request.user.is_authenticated %}
         {% if request.user.is_superuser %}
+         <li class="">
+            <a  href="{% url 'dashboards:superdash' %}" aria-expanded="false">
+              <div class="nav_icon_small">
+                <img src="{% static 'img/menu-icon/dashboard.svg' %}">
+            </div>
+            <div class="nav_title">
+                <span>Dashboard</span>
+            </div>
+            </a>
+        </li>
         <li class="">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <div class="nav_icon_small">
@@ -36,7 +46,23 @@
                 </div>
             </a>
             <ul>  
+              <li><a href="/accounts/userprofiles/">View Users</a></li>
               <li><a href="/accounts/register/">Add User</a></li>
+            </ul>
+        </li>
+          <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{% static 'img/menu-icon/dashboard.svg' %}" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Configurations </span>
+                </div>
+            </a>
+            <ul>  
+              <li><a href="/configurations/cities/">Cities</a></li>
+              <li><a href="/configurations/subscriptions/">Subscriptions</a></li>
+              <li><a href="/companies/email-templates/">Email Templates</a></li>
             </ul>
         </li>
         {% else %}

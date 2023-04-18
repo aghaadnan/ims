@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
+<div class="main_content_iner ">
+        <div class="container-fluid p-0">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                <div class="white_card card_height_100 mb_30">
+                <div class="white_card_header">
       <h2>{{ company.name }}</h2>
+      </div>
+      <div class="white_card_body">
+
       <dl class="row">
         <dt class="col-sm-3">Name:</dt>
         <dd class="col-sm-9">{{ company.name }}</dd>
@@ -32,15 +38,7 @@
             <td>{{ user.last_name }}</td>
             <td>{{ user.email }}</td>
             <td>
-              {% if user.is_manager %}
-              Manager
-              {% elif user.is_admin %}
-              Admin
-              {% elif user.is_installer %}
-              Installer
-              {% elif user.is_agent %}
-              Agent
-              {% endif %}
+             {{ user.usertype }} 
             </td>
           </tr>
           {% endfor %}
@@ -53,5 +51,8 @@
       </form>
     </div>
   </div>
+</div>
+ </div>
+</div>
 </div>
 {% endblock %}
