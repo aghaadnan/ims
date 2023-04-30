@@ -1,0 +1,40 @@
+<!-- email_template_update.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main_content_iner ">
+    <div class="container-fluid p-0 sm_padding_15px">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="white_card card_height_100 mb_30">
+                    <div class="white_card_header">
+                        <div class="box_header m-0">
+                            <div class="main-title">
+                              <h2>Update Email Template</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="white_card_body">
+                        <div class="card-body">
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label" for="{{ form.subject.id_for_label }}">Subject</label>
+            {{ form.subject }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="{{ form.body.id_for_label }}">Body</label>
+            {{ form.body }}
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>  
+{% endblock %}
+
+

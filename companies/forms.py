@@ -3,7 +3,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
 from crispy_bootstrap5.bootstrap5 import FloatingField
 from crispy_bootstrap5.bootstrap5 import BS5Accordion
-from .models import Company, EmailTemplate
+from .models import Company, EmailTemplate, SmsTemplate
 
 class CompanyForm(forms.ModelForm):
     helper = FormHelper()
@@ -30,3 +30,9 @@ class EmailTemplateForm(forms.ModelForm):
         'body': forms.Textarea(attrs={'rows': 10}),
         
     }
+        
+
+class SmsTemplateForm(forms.ModelForm):
+    class Meta:
+        model = SmsTemplate
+        fields = ['subject', 'body']

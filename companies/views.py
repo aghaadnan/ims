@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import CompanyForm, EmailTemplateForm
-from .models import Company, EmailTemplate
+from .forms import CompanyForm, EmailTemplateForm, SmsTemplateForm
+from .models import Company, EmailTemplate, SmsTemplate
 from accounts.models import UserProfile
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
@@ -140,19 +140,51 @@ class EmailTemplateListView(ListView):
     template_name = 'email_templates/email_template_list.html'
     context_object_name = 'email_templates'
 
+class EmailTemplateDetailView(DetailView):
+    model = EmailTemplate
+    template_name = 'email_templates/email_template_detail.html'
+    context_object_name = 'email_template'
+
+
 class EmailTemplateCreateView(CreateView):
     model = EmailTemplate
     form_class = EmailTemplateForm
     template_name = 'email_templates/email_template_create.html'
-    success_url = reverse_lazy('email_templates:list')
+    success_url = reverse_lazy('companies:email_template_list')
 
 class EmailTemplateUpdateView(UpdateView):
     model = EmailTemplate
     form_class = EmailTemplateForm
+    context_object_name = 'email_templates'
     template_name = 'email_templates/email_template_update.html'
-    success_url = reverse_lazy('email_templates:list')
+    success_url = reverse_lazy('companies:email_template_list')
 
 class EmailTemplateDeleteView(DeleteView):
     model = EmailTemplate
     template_name = 'email_templates/email_template_confirm_delete.html'
     success_url = reverse_lazy('email_templates:list')
+
+class SmsTemplateListView(ListView):
+    model = SmsTemplate
+    template_name = 'sms_templates/sms_template_list.html'
+    context_object_name = 'sms_templates'
+
+class SmsTemplateCreateView(CreateView):
+    model = SmsTemplate
+    form_class = SmsTemplateForm
+    template_name = 'sms_templates/sms_template_create.html'
+    success_url = reverse_lazy('companies:sms_template_list')
+
+class SmsTemplateUpdateView(UpdateView):
+    model = SmsTemplate
+    form_class = SmsTemplateForm
+    template_name = 'sms_templates/sms_template_update.html'
+    success_url = reverse_lazy('companies:sms_template_list')
+
+class SmsTemplateDeleteView(DeleteView):
+    model = SmsTemplate
+    success_url = reverse_lazy('companies:sms_template_list')
+
+class SmsTemplateDetailView(DetailView):
+    model = SmsTemplate
+    context_object_name = 'sms_template'

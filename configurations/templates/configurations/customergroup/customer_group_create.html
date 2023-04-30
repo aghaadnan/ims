@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main_content_iner ">
+    <div class="container-fluid p-0 sm_padding_15px">
+        <div class="row justify-content-left">
+            <div class="col-lg-4">
+                <div class="white_card card_height_100 mb_30">
+                    <div class="white_card_header">
+                        <div class="box_header m-0">
+                            <div class="main-title">
+                              <h2>{% if object %}Update{% else %}Create{% endif %} Customer Group</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="white_card_body">
+                        <div class="card-body">
+              
+              <form method="post">
+                {% csrf_token %}
+                {% load crispy_forms_tags %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary">Save</button>
+              </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>  
+{% endblock %}

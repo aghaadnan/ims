@@ -2,8 +2,25 @@
  <!-- sidebar  -->
 <nav class="sidebar">
     <div class="logo d-flex justify-content-between">
-        <a class="large_logo" href="/"><img src="{% static 'img/logo.png' %}" alt=""></a>
-        <a class="small_logo" href="/"><img src="{% static 'img/mini_logo.png' %}" alt=""></a>
+{% if request.user.is_superuser %}
+    <a class="large_logo" href="{% url 'dashboards:superdash' %}">
+{% elif request.user.is_admin %}
+    <a class="large_logo" href="{% url 'dashboards:companydash' %}">
+{% else %}
+    <a class="large_logo">
+{% endif %}
+    <img src="{% static 'img/logo.png' %}" alt="">
+    </a>
+{% if request.user.is_superuser %}
+    <a class="small_logo" href="{% url 'dashboards:superdash' %}">
+{% elif request.user.is_admin %}
+    <a class="small_logo" href="{% url 'dashboards:companydash' %}">
+{% else %}
+    <a class="small_logo">
+{% endif %}
+<img src="{% static 'img/mini_logo.png' %}" alt="">
+</a>
+        
         <div class="sidebar_close_icon d-lg-none">
             <i class="ti-close"></i>
         </div>
@@ -63,23 +80,74 @@
               <li><a href="/configurations/cities/">Cities</a></li>
               <li><a href="/configurations/subscriptions/">Subscriptions</a></li>
               <li><a href="/companies/email-templates/">Email Templates</a></li>
+              <li><a href="/companies/sms-templates/">SMS Templates</a></li>
             </ul>
         </li>
         {% else %}
             {% if request.user.is_admin and not request.user.is_superuser %}
         <li class="">
-            <a class="has-arrow" href="#" aria-expanded="false">
+            <a  href="{% url 'dashboards:companydash' %}" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="{% static 'img/menu-icon/dashboard.svg' %}" alt="">
+                    <img src="{% static 'img/menu-icon/dashboard.svg' %}">
                 </div>
                 <div class="nav_title">
-                    <span>Staff Management </span>
+                    <span>Dashboard</span>
+                </div>
+            </a>
+        </li>
+        <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{% static 'img/menu-icon/24.svg' %}" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Employees</span>
                 </div>
             </a>
             <ul>
-                <li><a href="\accounts\staff\">Staff list</a></li>
-              <li><a href="\accounts\staff\create\">Add staff</a></li>
+                <li><a href="\accounts\staff\">Employees list</a></li>
+              <li><a href="\accounts\staff\create\">Add Employees</a></li>
               
+            </ul>
+        </li>
+        <li class="">
+            <a  href="/leads/" aria-expanded="false">
+              <div class="nav_icon_small">
+                <img src="{% static 'img/menu-icon/22.svg' %}">
+            </div>
+            <div class="nav_title">
+                <span>Sale Leads</span>
+            </div>
+            </a>
+        </li>
+        <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{% static 'img/menu-icon/20.svg' %}" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Accounts </span>
+                </div>
+            </a>
+            <ul>  
+              <li><a href="/accounts/userprofiles/">Vendors</a></li>
+              <li><a href="/accounts/register/">Purchase invoice</a></li>
+              <li><a href="/accounts/register/">Payment recovery</a></li>
+            </ul>
+        </li> 
+        <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{% static 'img/menu-icon/23.svg' %}" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Operations</span>
+                </div>
+            </a>
+            <ul>
+            
+              <li><a href="#">Complain Management</a></li>
+           
             </ul>
         </li>
           <li class="">
@@ -94,6 +162,43 @@
             <ul>
                 <li><a href="/inventory/trackerdevices/">Trackers</a></li>
               <li><a href="/inventory/sims/">Sims</a></li>
+              <li><a href="#">Prodict List</a></li>
+              <li><a href="#">Stock Movement</a></li>
+              <li><a href="#">Sims</a></li>
+              
+            </ul>
+        </li>
+        <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{% static 'img/menu-icon/6.svg' %}" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Reports</span>
+                </div>
+            </a>
+            <ul>
+           
+              <li><a href="#">Sales Reports</a></li>
+              <li><a href="#">Inventory Reports</a></li>
+              <li><a href="#">Actviti Logs</a></li>
+              
+            </ul>
+        </li>
+        <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{% static 'img/menu-icon/6.svg' %}" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Letters</span>
+                </div>
+            </a>
+            <ul>
+           
+              <li><a href="#">Welcome Letter</a></li>
+              <li><a href="#">Installation Letter</a></li>
+              <li><a href="#">NR Letter</a></li>
               
             </ul>
         </li>
@@ -140,6 +245,30 @@
                 <li><a href="/installations/">View Installations</a></li>
               <li><a href="/installations/create/">Add installations</a></li>
               
+            </ul>
+        </li>
+        <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{% static 'img/menu-icon/18.svg' %}" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Setup</span>
+                </div>
+            </a>
+            <ul>
+                <li><a href="/configurations/departments/">Departments</a></li>
+              <li><a href="/configurations/cities/">Cities</a></li>
+              <li><a href="/configurations/provinces/">State/Province</a></li>
+              <li><a href="/configurations/customer-group/">Customer Group</a></li>
+              <li><a href="/configurations/insurance/">Insurance</a></li>
+              <li><a href="/configurations/banks/">Banks</a></li>
+              <li><a href="/configurations/vehicle-makes/">Vehicle Make</a></li>
+             <li><a href="/configurations/vehicle-model/">Vehicle Model</a></li>
+              
+              <li><a href="/configurations/packages/">Packages</a></li>
+              <li><a href="/configurations/complain-types/">Complain Types</a></li>
+              <li><a href="/accounts/usertype/">User Types</a></li>
             </ul>
         </li>
             {% endif %}

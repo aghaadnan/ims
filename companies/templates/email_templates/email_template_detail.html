@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main_content_iner ">
+    <div class="container-fluid p-0 sm_padding_15px">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="white_card card_height_100 mb_30">
+                    <div class="white_card_header">
+                        <div class="box_header m-0">
+                            <div class="main-title">
+                              <h2>Email Template Detail</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="white_card_body">
+                        <div class="card-body">
+
+    <table class="table table-striped">
+      <tr>
+        <th>Company</th>
+        <td>{{ email_template.company }}</td>
+      </tr>
+      <tr>
+        <th>Subject</th>
+        <td>{{ email_template.subject }}</td>
+      </tr>
+      <tr>
+        <th>Content</th>
+        <td>{{ email_template.body|safe }}</td>
+      </tr>
+      <tr>
+        <th>Days Before Expiry</th>
+        <td>{{ email_template.days_before_expiry }}</td>
+      </tr>
+    </table>
+
+    <a href="{% url 'companies:email_template_edit' email_template.pk %}" class="btn btn-primary">Edit</a>
+    <a href="{% url 'companies:email_template_list' %}" class="btn btn-secondary">Back to Email Templates List</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>  
+{% endblock %}

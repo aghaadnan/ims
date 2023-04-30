@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main_content_iner ">
+    <div class="container-fluid p-0 sm_padding_15px">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="white_card card_height_100 mb_30">
+                    <div class="white_card_header">
+                        <div class="box_header m-0">
+                            <div class="main-title">
+                              <h2>Email Template Detail</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="white_card_body">
+                        <div class="card-body">
+
+                          <p>ID: {{ sms_template.id }}</p>
+                          <p>Subject: {{ sms_template.subject }}</p>
+                          <p>Body: {{ sms_template.body }}</p>
+                          <p>Date: {{ sms_template.sms_date }}</p>
+                          <a href="{% url 'companies:sms_template_update' sms_template.pk %}">Edit</a> |
+                          <a href="{% url 'companies:sms_template_delete' sms_template.pk %}">Delete</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>  
+{% endblock %}

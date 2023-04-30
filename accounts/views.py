@@ -11,11 +11,11 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from .forms import CustomUserCreationForm
-from .models import UserProfile, UserType
+from .models import UserProfile, UserType, ContactNumber
 from django.urls import reverse, reverse_lazy
 from django import forms
 from django.http import Http404
-
+from django.forms import FileInput
 class LandingPageView(TemplateView):
     template_name = "landing_page.html"
 
@@ -46,8 +46,8 @@ def register(request):
         if form.is_valid():
             form.instance.is_admin = True
             user = form.save()
-            login(request, user)
-            return redirect('landing-page')
+            #login(request, user)
+            return redirect('/accounts/userprofiles/')#('landing-page')
     else:
         form = CustomUserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
@@ -89,7 +89,7 @@ def redirect_user(request):
         return redirect('/dashboards/')
     elif request.user.is_admin:
         print("Redirecting to /inventory/")
-        return redirect('/inventory/')
+        return redirect('/dashboards/company/')
     else:
         print("Redirecting to /accounts/profile/")
         return redirect('/accounts/profile/')
@@ -146,12 +146,12 @@ class StaffCreationForm(UserCreationForm):
     password1 = forms.CharField(
         label="Password",
         strip=False,
-        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'form-control'}),
         help_text="Your password must contain at least 8 characters.",
     )
     password2 = forms.CharField(
         label="Confirm password",
-        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'form-control'}),
         strip=False,
         help_text="Enter the same password as before, for verification.",
     )
@@ -165,7 +165,16 @@ class StaffCreationForm(UserCreationForm):
     class Meta:
         
         model = UserProfile
-        fields = ['username', 'first_name', 'last_name', 'email','usertype', 'is_active']
+        fields = ['username', 'first_name', 'last_name', 'email','contact_number_1','contact_number_2','nic','address','refrence','usertype','document', 'is_active']
+        widgets = {
+            'document': FileInput(attrs={'class': 'form-control','aria-describedby':'inputGroupFileAddon03', 'aria-label':'Upload'}),
+            'nic': forms.TextInput(attrs={'class': 'form-control'}),
+            'address': forms.TextInput(attrs={'class': 'form-control'}),
+            'refrence': forms.TextInput(attrs={'class': 'form-control'}),
+         
+
+
+        }
         def clean_usertype(self):
             usertype = self.cleaned_data.get('usertype')
             if not usertype:

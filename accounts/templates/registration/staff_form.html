@@ -1,4 +1,154 @@
 {% extends 'base.html' %}
+{% load custom_filters %}
+{% block content %}
+<div class="col-lg-12">
+  <div class="white_card card_height_100 mb_30">
+      <div class="white_card_header">
+          <div class="box_header m-0">
+              <div class="main-title">
+                  <h3 class="m-0">Create Staff Account</h3>
+              </div>
+          </div>
+      </div>
+      <div class="white_card_body">
+          <div class="card-body">
+              <form method='post' enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <div class="row mb-3">
+                      <div class="col-md-6">
+                          <label for="{{ form.username.auto_id }}" class="form-label requiredField">
+                              {{ form.username.label }}<span class="asteriskField">*</span>
+                          </label>
+                          <input type="text" name="{{ form.username.html_name }}" maxlength="150" autofocus class="textinput textInput form-control" required id="{{ form.username.auto_id }}">
+                          <small id="hint_id_username" class="form-text text-muted">{{ form.username.help_text }}</small>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="{{ form.usertype.auto_id }}" class="form-label requiredField">
+                            {{ form.usertype.label }}<span class="asteriskField">*</span>
+                        </label>
+                        <select name="{{ form.usertype.html_name }}" class="nice_Select wide mb_30" required id="{{ form.usertype.auto_id }}">
+                            <option value="" selected>---------</option>
+                            {% for usertype_instance in form.usertype.field.queryset %}
+                                <option value="{{ usertype_instance.pk }}" {% if form.usertype.value == usertype_instance.pk %}selected{% endif %}>{{ usertype_instance }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                      <div class="col-md-6">
+                          <label for="{{ form.first_name.auto_id }}" class="form-label">
+                              {{ form.first_name.label }}
+                              
+                          </label>
+                          <input type="text" name="{{ form.first_name.html_name }}" maxlength="150" autofocus class="textinput textInput form-control" required id="{{ form.first_name.auto_id }}">   
+                      </div>
+                      <div class="col-md-6">
+                          <label for="{{ form.last_name.auto_id }}" class="form-label">
+                              {{ form.last_name.label }}
+                          </label>
+                          <input type="text" name="{{ form.last_name.html_name }}" maxlength="150" autofocus class="textinput textInput form-control" required id="{{ form.last_name.auto_id }}">
+                          
+                      </div>
+                  </div>
+                  <div class="row mb-3">
+                      <div class="col-md-6">
+                          <label for="{{ form.email.auto_id }}" class="form-label">
+                              {{ form.email.label }}
+                          </label>
+                          <input type="email" name="{{ form.email.html_name }}" maxlength="150" autofocus class="textinput textInput form-control" required id="{{ form.email.auto_id }}">
+                         
+                      </div>
+                      <div class="col-md-6">
+                          <label for="{{ form.contact_number_1.auto_id }}" class="form-label">
+                              {{ form.contact_number_1.label }}
+                          </label>
+                          <input type="text" name="{{ form.contact_number_1.html_name }}" maxlength="150" autofocus class="textinput textInput form-control" required id="{{ form.contact_number_1.auto_id }}">
+                      
+                      </div>
+                  </div>
+                  <div class="row mb-3">
+                      <div class="col-md-6">
+                          <label for="{{ form.contact_number_2.auto_id }}" class="form-label">
+                              {{ form.contact_number_2.label }}
+                          </label>
+                          <input type="text" name="{{ form.contact_number_2.html_name }}" maxlength="150" autofocus class="textinput textInput form-control" required id="{{ form.contact_number_2.auto_id }}">
+                       
+                      </div>
+                      <div class="col-md-6">
+                          <label for="{{ form.nic.auto_id }}" class="form-label">
+                              {{ form.nic.label }}
+                          </label>
+                          <input type="text" name="{{ form.nic.html_name }}" maxlength="150" autofocus class="textinput textInput form-control" required id="{{ form.nic.auto_id }}">
+                      
+                      </div>
+                  </div>
+                  <div class="mb-3">
+                      <label for="{{ form.address.auto_id }}" class="form-label">
+                          {{ form.address.label }}
+                      </label>
+                      {{ form.address }}
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label for="{{ form.refrence.auto_id }}" class="form-label">
+                          {{ form.refrence.label }}
+                      </label>
+                      {{ form.refrence }}
+                    </div>
+                  <div class="col-md-6">
+                      <label for="{{ form.document.auto_id }}" class="form-label">
+                        {{ form.document.label }}
+                      </label>
+                      <div>
+                          {{ form.document }}
+                      </div>
+                  </div>
+                </div>
+                  <div class="mb-3">
+                      <div id="div_id_is_active" class="mb-3 form-check">
+                          {{ form.is_active }}
+                          <label for="{{ form.is_active.auto_id }}" class="form-check-label">
+                              {{ form.is_active.label }}
+                          </label>
+                          <small id="hint_id_is_active" class="form-text text-muted">{{ form.is_active.help_text }}</small>
+                      </div>
+                  </div>
+                  <div class="row mb-3">
+                      <div class="col-md-6">
+                          <label for="{{ form.password1.auto_id }}" class="form-label requiredField">
+                              {{ form.password1.label }}<span class="asteriskField">*</span>
+                          </label>
+                          {{ form.password1 }}
+                          <small id="hint_id_password1" class="form-text text-muted">{{ form.password1.help_text }}</small>
+                      </div>
+                      <div class="col-md-6">
+                          <label for="{{ form.password2.auto_id }}" class="form-label requiredField">
+                              {{ form.password2.label }}<span class="asteriskField">*</span>
+                          </label>
+                          {{ form.password2 }}
+                          <small id="hint_id_password2" class="form-text text-muted">{{ form.password2.help_text }}</small>
+                      </div>
+                  </div>
+
+                  <button type='submit' class="btn btn-primary">Save</button>
+              </form>
+              <hr />
+          </div>
+      </div>
+  </div>
+</div>
+
+
+  {% endblock %}
+
+
+
+
+
+
+
+
+{% comment %} {% extends 'base.html' %}
 
 {% block content %}
  
@@ -14,7 +164,7 @@
  <div class="white_card card_height_100 mb_30">
  <div class="white_card_body">
 <h2>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Staff Account</h2>
-<form method='post'>
+<form method='post' enctype="multipart/form-data">
 {% csrf_token %}
 {% load crispy_forms_tags %}
 {{ form|crispy }}
@@ -30,4 +180,4 @@
 </div>
 </div>
 </div>
-{% endblock %}
+{% endblock %} {% endcomment %}

@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="main_content_iner overly_inner ">
+    <div class="container-fluid p-0 ">
+        <!-- page title  -->
+        <div class="row">
+            <div class="col-12">
+                    <div class="row">
+                        <div class="col-xl-4 ">
+                            <div class="white_card card_height_100 mb_30 user_crm_wrapper">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="single_crm">
+                                            <div class="crm_head d-flex align-items-center justify-content-between" >
+                                                <div class="thumb">
+                                                    <img src="img/crm/businessman.svg" alt="">
+                                                    <i class="white_text">Today</i>
+                                                </div>
+                                                <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
+                                            </div>
+                                            <div class="crm_body">
+                                                <h4>{{today_leads}}</h4>
+                                                <p>Sale Leads</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="single_crm ">
+                                            <div class="crm_head crm_bg_1 d-flex align-items-center justify-content-between" >
+                                                <div class="thumb">
+                                                    <img src="img/crm/customer.svg" alt="">
+                                                    <i class="white_text">This weak</i>
+                                                </div>
+                                                <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
+                                            </div>
+                                            <div class="crm_body">
+                                                <h4>{{week_leads}}</h4>
+                                                <p>Sale Leads</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="single_crm">
+                                            <div class="crm_head crm_bg_2 d-flex align-items-center justify-content-between" >
+                                                <div class="thumb">
+                                                    <img src="img/crm/infographic.svg" alt="">
+                                                    <i class="white_text">This Month</i>
+                                                </div>
+                                                <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
+                                            </div>
+                                            <div class="crm_body">
+                                                <h4>{{month_leads}}</h4>
+                                                <p>Sale Leads</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="single_crm">
+                                            <div class="crm_head crm_bg_3 d-flex align-items-center justify-content-between" >
+                                                <div class="thumb">
+                                                    <img src="img/crm/sqr.svg" alt="">
+                                                    <i class="white_text">This year</i>
+                                                </div>
+                                                <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
+                                            </div>
+                                            <div class="crm_body">
+                                                <h4>{{year_leads}}</h4>
+                                                <p>Sale leads</p>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                
+                            
+                            </div>
+                            
+                    </div>  <!-- row  -->
+                    
+                    <div class="col-xl-8 "> <!--Stock chart div start-->
+                        <div class="white_card mb_30 card_height_100">
+                            <div class="white_card_header">
+                                <div class="row align-items-center justify-content-between flex-wrap">
+                                    <div class="col-lg-4">
+                                        <div class="main-title">
+                                            <h3 class="m-0">Stoke Details</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 text-end d-flex justify-content-end">
+                                        <select class="nice_Select2 max-width-220" >
+                                            <option value="1">Show by month</option>
+                                            <option value="1">Show by year</option>
+                                            <option value="1">Show by day</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="white_card_body">
+                                <div id="management_bar"></div>
+                            </div>
+                    
+                    </div><!---Stock chart -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card mb-3 widget-chart">
+                    <div class="icon-wrapper rounded-circle">
+                        <div class="icon-wrapper-bg bg-primary"></div>
+                          <i class="ti-settings text-primary"></i>
+                        </div>
+                    <div class="widget-numbers"><span>{{ new_leads }}</span></div>
+                    <div class="widget-subheading">New Leads</div>
+                  
+                </div>
+              </div>
+        
+              <div class="col-md-3">
+                <div class="card mb-3 widget-chart">
+                  <div class="icon-wrapper rounded-circle">
+                    <div class="icon-wrapper-bg bg-warning"></div>
+                    <i class="ti-archive text-warning"></i>
+                  </div>
+                  <div class="widget-numbers"><span>{{ confirmed_leads }}</span></div>
+                  <div class="widget-subheading">Confirmed leads</div>
+                </div>
+              </div>
+        
+              <div class="col-md-3">
+                <div class="card mb-3 widget-chart">
+                  <div class="icon-wrapper rounded-circle">
+                    
+                    <div class="icon-wrapper-bg bg-success"></div>
+                    <i class="ti-check text-success"></i>
+                  </div>
+                  <div class="widget-numbers"><span>{{ rejected_leads }}</span></div>
+                  <div class="widget-subheading">Installed leads</div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card mb-3 widget-chart">
+                  <div class="icon-wrapper rounded-circle">
+                    <div class="icon-wrapper-bg bg-danger"></div>
+                    <i class="ti-alert text-danger"></i>
+                  </div>
+                  <div class="widget-numbers"><span>{{ installed_leads }}</span></div>
+                  <div class="widget-subheading">Rejected Leads</div>
+                </div>
+              </div>
+              
+        </div>
+    </div>  <!-- container-fluid  -->
+</div><!-- main_content_iner -->
+{% endblock %}

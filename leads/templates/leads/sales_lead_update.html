@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main_content_iner ">
+    <div class="container-fluid p-0 sm_padding_15px">
+        <div class="row justify-content-left">
+            <div class="col-lg-4">
+                <div class="white_card card_height_100 mb_30">
+                    <div class="white_card_header">
+                        <div class="box_header m-0">
+                            <div class="main-title">
+                              <h2>{% if object %}Update{% else %}Create{% endif %} Sale lead</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="white_card_body">
+                        <div class="card-body">
+              <form method="post">
+                {% csrf_token %}
+                {% load crispy_forms_tags %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary">Save</button>
+              </form>
+                        
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>  
+{% endblock %}
+{% comment %} <form method="post">
+    {% csrf_token %}
+    <label for="{{ form.cutomername.auto_id }}" class="form-label requiredField">
+      {{ form.cutomername.label }}<span class="asteriskField">*</span>
+    </label><br>
+    {{ form.cutomername }}<br><br>
+    <label for="{{ form.ContactNumber.auto_id }}" class="form-label requiredField">
+      {{ form.ContactNumber.label }}<span class="asteriskField">*</span>
+    </label><br>
+    {{ form.ContactNumber }}<br><br>
+    <label for="{{ form.Address.auto_id }}" class="form-label requiredField">
+      {{ form.Address.label }}<span class="asteriskField">*</span>
+    </label><br>
+    {{ form.Address }}<br><br>
+    <label for="{{ form.city.auto_id }}" class="form-label requiredField">
+        {{ form.city.label }}<span class="asteriskField">*</span>
+      </label><br>
+      {{ form.city }}<br><br>
+      <label for="{{ form.province.auto_id }}" class="form-label requiredField">
+        {{ form.province.label }}<span class="asteriskField">*</span>
+      </label><br>
+      {{ form.province }}<br><br>
+      <label for="{{ form.package.auto_id }}" class="form-label requiredField">
+        {{ form.package.label }}<span class="asteriskField">*</span>
+      </label><br>
+      {{ form.package }}<br><br>
+      <label for="{{ form.requirements.auto_id }}" class="form-label requiredField">
+        {{ form.requirements.label }}<span class="asteriskField">*</span>
+      </label><br>
+      {{ form.requirements }}<br><br>
+      <button type="submit" class="btn btn-primary">Create Sales Lead</button>
+      </form> {% endcomment %}

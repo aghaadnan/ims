@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main_content_iner ">
+    <div class="container-fluid p-0">
+        <div class="row justify-content-right">
+            <div class="col-lg-6">
+                <div class="white_card card_height_100 mb_30">
+                    <div class="white_card_header">
+                        <div class="box_header m-0">
+                            <div class="main-title">
+                                <h3 class="m-0">Cities</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="white_card_body">
+                        <div class="QA_section">
+                            <div class="white_box_tittle list_header">
+                                {% comment %} <h4>shorting Arrow</h4> {% endcomment %}
+                                <div class="box_right d-flex lms_block">
+                                    {% comment %} <div class="serach_field_2">
+                                        <div class="search_inner">
+                                            <form Active="#">
+                                                <div class="search_field">
+                                                    <input type="text" placeholder="Search content here...">
+                                                </div>
+                                                <button type="submit"> <i class="ti-search"></i> </button>
+                                            </form>
+                                        </div>
+                                    </div> {% endcomment %}
+                                    <div class="add_button ms-2">
+                                      <a href="{% url 'configurations:vehicle-model-create' %}" class="btn btn-primary mb-3">Add Vehicle Model</a>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="QA_table mb_30">
+                                <!-- table-responsive -->
+    <table class="table lms_table_active3 ">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Vehicle Make</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for vehicle_model in object_list %}
+          <tr>
+            <td>{{ vehicle_model.name }}</td>
+            <td>{{ vehicle_model.description }}</td>
+            <td>{{ vehicle_model.vehiclemake }}</td>
+            <td>
+              <a href="{% url 'configurations:vehicle-model-update' vehicle_model.pk %}" class="btn btn-secondary">Edit</a>
+              <a href="{% url 'configurations:vehicle-model-delete' vehicle_model.pk %}" class="btn btn-danger">Delete</a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="4" class="text-center">No vehicle models found.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+              </table>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        
+        </div>
+        </div>
+        </div>
+{% endblock %}

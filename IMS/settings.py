@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'installations',
     'dashboards',
     'configurations',
+    'leads',
     
     ]
 

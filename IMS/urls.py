@@ -35,6 +35,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('dashboards/',include('dashboards.urls', namespace="dashboards")),
     path('configurations/',include('configurations.urls', namespace="configurations")),
+    path('leads/',include('leads.urls', namespace="leads")),
     path('redirect/', redirect_user, name='redirect'),
     
 ]
