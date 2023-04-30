@@ -40,3 +40,10 @@ class EmailTemplate(models.Model):
 
     def __str__(self):
         return self.subject
+    
+class SmsTemplate(models.Model):
+    subject = models.CharField(max_length=255)
+    body = models.TextField()
+    sms_date = models.DateField(auto_now_add=True)
+    def __str__(self):
+        return self.subject
